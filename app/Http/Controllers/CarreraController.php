@@ -24,7 +24,7 @@ class CarreraController extends Controller
     public function index(Request $request)
     {
         $idcarrera = $request['idcarrera'];
-        $idcarrerasec = $request['id_sec'];
+        $idreg = $request['id_registro'];
         $numserie = $request['numserie'];
         $velocidad = $request['velocidad'];
         $revoluciones = $request['revoluciones'];
@@ -43,8 +43,11 @@ class CarreraController extends Controller
 
         $user = DB::table('coches')->where('num_serie', $numserie)->first();
 
-        DB::table('carreras')->insert(['id_carrera'=>$idcarrera,'id_carrera_secundario'=>$idcarrerasec,'n_serie'=>$numserie,'usuario_id'=>$user->user_id,'velocidad'=>$velocidad,'revoluciones'=>$revoluciones,'temperatura'=>$temperatura]);
-
+        if(DB::table('carreras')->where('id_carrera', $idcarrera)->first()){
+            DB::table('carreras_registros')->insert(['id_registro'=>$idreg,'carrera_id'=>$idcarrera,'velocidad'=>$velocidad,'revoluciones'=>$revoluciones,'temperatura'=>$temperatura]);
+        }else{
+            DB::table('carreras')->insert(['id_carrera' => $idcarrera, 'n_serie' => $numserie, 'usuario_id' => $user->id]);
+        }
 
 
     }
