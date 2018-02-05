@@ -46,7 +46,8 @@ class CarreraController extends Controller
         if(DB::table('carreras')->where('id_carrera', $idcarrera)->first()){
             DB::table('carreras_registros')->insert(['id_registro'=>$idreg,'carrera_id'=>$idcarrera,'velocidad'=>$velocidad,'revoluciones'=>$revoluciones,'temperatura'=>$temperatura]);
         }else{
-            DB::table('carreras')->insert(['id_carrera' => $idcarrera, 'n_serie' => $numserie, 'usuario_id' => $user->id]);
+            DB::table('carreras')->insert(['id_carrera' => $idcarrera, 'n_serie' => $numserie, 'usuario_id' => $user->user_id]);
+            DB::table('carreras_registros')->insert(['id_registro'=>$idreg,'carrera_id'=>$idcarrera,'velocidad'=>$velocidad,'revoluciones'=>$revoluciones,'temperatura'=>$temperatura]);
         }
 
 
