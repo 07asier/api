@@ -39,6 +39,14 @@ class CarreraController extends Controller
             //insert
             DB::table('carreras')->insert(['usuario_id'=>8,'n_serie'=>$numserie,'velocidad'=>$velocidad,'revoluciones'=>$revoluciones]);
         }*/
+        echo "ID carrera: $idcarrera<br>";
+        echo "ID registro: $idreg <br>";
+        echo "Numero de serie: $numserie<br>";
+        echo "Velocidad: $velocidad<br>";
+        echo "Revoluciones: $revoluciones<br>";
+        echo "Temperatura: $temperatura<br>";
+        
+
 
 
         $user = DB::table('coches')->where('num_serie', $numserie)->first();
