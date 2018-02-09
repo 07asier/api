@@ -24,7 +24,7 @@ class CarreraController extends Controller
     public function index(Request $request)
     {
         $idcarrera = $request['idcarrera'];
-        $idreg = $request['id_registro'];
+
         $numserie = $request['numserie'];
         $velocidad = $request['velocidad'];
         $revoluciones = $request['revoluciones'];
@@ -40,22 +40,22 @@ class CarreraController extends Controller
             DB::table('carreras')->insert(['usuario_id'=>8,'n_serie'=>$numserie,'velocidad'=>$velocidad,'revoluciones'=>$revoluciones]);
         }*/
         echo "ID carrera: $idcarrera<br>";
-        echo "ID registro: $idreg <br>";
+
         echo "Numero de serie: $numserie<br>";
         echo "Velocidad: $velocidad<br>";
         echo "Revoluciones: $revoluciones<br>";
         echo "Temperatura: $temperatura<br>";
-        
+
 
 
 
         $user = DB::table('coches')->where('num_serie', $numserie)->first();
 
         if(DB::table('carreras')->where('id_carrera', $idcarrera)->first()){
-            DB::table('carreras_registros')->insert(['id_registro'=>$idreg,'carrera_id'=>$idcarrera,'velocidad'=>$velocidad,'revoluciones'=>$revoluciones,'temperatura'=>$temperatura]);
+            DB::table('carreras_registros')->insert(['carrera_id'=>$idcarrera,'velocidad'=>$velocidad,'revoluciones'=>$revoluciones,'temperatura'=>$temperatura]);
         }else{
             DB::table('carreras')->insert(['id_carrera' => $idcarrera, 'n_serie' => $numserie, 'usuario_id' => $user->user_id]);
-            DB::table('carreras_registros')->insert(['id_registro'=>$idreg,'carrera_id'=>$idcarrera,'velocidad'=>$velocidad,'revoluciones'=>$revoluciones,'temperatura'=>$temperatura]);
+            DB::table('carreras_registros')->insert(['carrera_id'=>$idcarrera,'velocidad'=>$velocidad,'revoluciones'=>$revoluciones,'temperatura'=>$temperatura]);
         }
 
 
